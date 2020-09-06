@@ -1,5 +1,5 @@
-build:
-	g++ --std=c++11 main.cpp trie.cpp
+PWD := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-run:
-	./a.out
+build:
+	g++ --std=c++11 build.cpp trie/trie.cpp csv/csv.cpp
+	./a.out $(PWD)/static/EnglishDictionary.csv

@@ -2,31 +2,36 @@
 
 TrieNode::TrieNode() {
   this->isEnd = false;
-  for (int i = 0; i < TOTAL_ALPHABETS; ++i) {
+  this->freq = 0;
+  for (int i = 0; i < TRIE_ARRAY_SIZE; ++i) {
     this->arr[i] = nullptr;
   }
 }
 
-void TrieNode::insert(const string& key) {
+void TrieNode::insert(const string& key, const int& freq) {
   TrieNode* curr = this;
   for (char item : key) {
-    int index = item - 'a';
+    int index = item;
     if (!curr->arr[index]) {
       curr->arr[index] = new TrieNode();
     }
     curr = curr->arr[index];
   }
   curr->isEnd = true;
+  curr->freq = freq;
 }
 
-bool TrieNode::search(const string& key) {
+pair<bool, int> TrieNode::search(const string& key) {
   TrieNode* curr = this;
   for (char item : key) {
-    int index = item - 'a';
+    int index = item;
     if (!curr->arr[index]) {
-      return false;
+      return make_pair(false, 0);
     }
     curr = curr->arr[index];
   }
-  return nullptr != curr && curr->isEnd;
+  if (nullptr == curr && !curr->isEnd) {
+    return make_pair(false, 0);
+  }
+  return make_pair(true, curr->freq);
 }
