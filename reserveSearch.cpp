@@ -3,6 +3,11 @@
 #include "experimental/filesystem"
 namespace fs = std::experimental::filesystem;
 
+/**
+ * Parse the input CSV file to create a `SpecialTrieNode` object instance (in which words 
+ * are stored along with their index values) & search a given word using its index value.
+ */
+
 int main(int args, char** argv);
 SpecialTrieNode* convertDictToSpecialTrie(unordered_set<string>& dict);
 
@@ -26,6 +31,13 @@ int main(int args, char** argv) {
   return 0;
 }
 
+/**
+ * Convert an `unordered_set` to `SpecialTrieNode` object instance.
+ * 
+ * @param dict `unordered_set` containing dictionary words to store in trie data structure
+ * 
+ * @returns Object Instance (Pointer) of the trie data structure
+ */
 SpecialTrieNode* convertDictToSpecialTrie(unordered_set<string>& dict) {
   SpecialTrieNode *trieRoot = new SpecialTrieNode(dict.size());
   int i = 0;

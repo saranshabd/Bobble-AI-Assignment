@@ -1,7 +1,7 @@
 #include "trie.hpp"
 
 /**
- * Create a new `TrieNode` instance & initialize all private data members
+ * Constructor for `TrieNode` class
  */
 TrieNode::TrieNode() {
   this->isEnd = false;
@@ -51,12 +51,4 @@ pair<bool, int> TrieNode::search(const string& key) {
   }
   return make_pair(true, curr->freq);
 }
-
-void TrieNode::serialize(const string& filename) {
   
-}
-
-
-void TrieNode::deserialize(const string& filename) {
-
-}
