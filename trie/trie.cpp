@@ -20,7 +20,7 @@ TrieNode::TrieNode() {
 void TrieNode::insert(const string& key, const int& freq) {
   TrieNode* curr = this;
   for (char item : key) {
-    int index = item;
+    int index = item; // ASCII value of char
     if (!curr->arr[index]) {
       curr->arr[index] = new TrieNode();
     }
@@ -46,7 +46,7 @@ pair<bool, int> TrieNode::search(const string& key) {
     }
     curr = curr->arr[index];
   }
-  if (nullptr == curr && !curr->isEnd) {
+  if (nullptr == curr || !curr->isEnd) {
     return make_pair(false, 0);
   }
   return make_pair(true, curr->freq);
