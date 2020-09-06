@@ -12,6 +12,8 @@ public:
   TrieNode();
   void insert(const string&, const int&);
   pair<bool, int> search(const string&);
+  void serialize(const string&);
+  void deserialize(const string&);
 
 private:
 
