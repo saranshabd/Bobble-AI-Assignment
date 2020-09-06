@@ -1,19 +1,22 @@
 #include "specialTrie/specialTrie.hpp"
 #include "csv/csv.hpp"
+#include "experimental/filesystem"
+namespace fs = std::experimental::filesystem;
 
 int main(int args, char** argv);
 SpecialTrieNode* convertDictToSpecialTrie(unordered_set<string>& dict);
 
 int main(int args, char** argv) {
-  if (args < 3) {
+  if (args < 2) {
     cout << "CSV filename and/or word to search missing; exitting...\n";
     exit(1);
   }
 
-  unordered_set<string> dict = CsvReader::parseToDict(argv[1]);
+  string csvFilePath = fs::current_path().string() + "/static/EnglishDictionary.csv";
+  unordered_set<string> dict = CsvReader::parseToDict(csvFilePath);
   SpecialTrieNode *trieRoot = convertDictToSpecialTrie(dict);
 
-  string searchedWord = trieRoot->search(stoi(argv[2]));
+  string searchedWord = trieRoot->search(stoi(argv[1]));
   if (searchedWord.empty()) {
     cout << "Word not found\n";
   } else {

@@ -1,5 +1,7 @@
 #include "trie/trie.hpp"
 #include "csv/csv.hpp"
+#include "experimental/filesystem"
+namespace fs = std::experimental::filesystem;
 
 /**
  * Parse the input CSV file to create a `TrieNode` object instance and serialize
@@ -8,12 +10,13 @@
  */
 
 int main(int args, char** argv) {
-  if (args < 3) {
+  if (args < 2) {
     cout << "CSV filename and/or word to search missing; exitting...\n";
     exit(1);
   }
   
-  TrieNode* trieRoot = CsvReader::parseToTrie(argv[1]);
+  string csvFilePath = fs::current_path().string() + "/static/EnglishDictionary.csv";
+  TrieNode* trieRoot = CsvReader::parseToTrie(csvFilePath);
 
   return 0;
 }
